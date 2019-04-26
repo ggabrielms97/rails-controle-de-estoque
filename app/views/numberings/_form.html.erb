@@ -1,0 +1,55 @@
+<div class="m-content">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <span class="m-portlet__head-icon m--hide">
+                <i class="la la-gear"></i>
+              </span>
+              <h3 class="m-portlet__head-text">
+                Novo tamanho
+              </h3>
+            </div>
+          </div>
+        </div>
+        
+        <%= form_with(model: numbering, local: true, html: {class: "m-form"}) do |form| %> 
+          <% if numbering.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(numbering.errors.count, "error") %> prohibited this numbering from being saved:</h2>
+
+              <ul>
+              <% numbering.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="m-portlet__body">
+            <div class="m-form__section m-form__section--first">
+              <div class="form-group m-form__group">
+                <label for="example_input_full_name">
+                  Nome:
+                </label>
+                <%= form.text_field :number, id: :numbering_number, class: "form-control m-input", placeholder: "Numeração / Tamanho" %>
+              </div>
+            </div>
+          </div>
+          <div class="m-portlet__foot m-portlet__foot--fit">
+            <div class="m-form__actions m-form__actions">
+              <button type="submit" class="btn btn-primary">
+                Salvar
+              </button>
+              <%= link_to numberings_path, class: "btn btn-secondary" do %>
+                Cancelar
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

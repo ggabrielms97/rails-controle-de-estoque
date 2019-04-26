@@ -1,0 +1,102 @@
+<div class="m-subheader ">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title m-subheader__title--separator">
+        Vendas
+      </h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a href="#" class="m-nav__link m-nav__link--icon">
+            <i class="m-nav__link-icon la la-home"></i>
+          </a>
+        </li>
+        <li class="m-nav__separator">
+          -
+        </li>
+        <li class="m-nav__item">
+          <a href="" class="m-nav__link">
+            <span class="m-nav__link-text">
+              Vendas
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>    
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--mobile">
+    <div class="m-portlet__body">
+      <div class="m-form m-form--label-align-left m--margin-top-20 m--margin-bottom-30">
+        <div class="row align-items-center">                    
+          <div class="col-xl-4 order-1 order-xl-2 m--align-left">
+            <%= link_to new_sale_path do %>
+              <button class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+              <span>
+                <i class="la la-cart-plus"></i>
+                <span>
+                  Nova venda
+                </span>
+              </span>
+              </button>           
+            <% end %>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="m-section">
+        <div class="m-section__content">
+          <table class="table m-table m-table--head-bg-success">
+            <thead>
+              <tr>
+                <th width="100">
+                  #
+                </th>
+                <th width="300">
+                  Vendedor
+                </th>
+                <th width="200">
+                  Cliente
+                </th>
+                <th width="100">
+                  Data
+                </th>
+                <th width="100" align="center">
+                  Produtos
+                </th>
+                <th width="5"></th>
+                <th width="5"></th>
+                <th width="5"></th>
+              </tr>
+            </thead>
+            <tbody> 
+              <% @sales.each do |sale| %>
+                <tr>
+                  <td>Venda #<%= sale.id %></td>
+                  <% c = Person.find_by_id(sale.client_id) %>
+                  <% v = Person.find_by_id(sale.seller_id) %>
+                  <td><%= v.name %></td>
+                  <td><%= c.name %></td>
+                  <td><%= sale.created_at.strftime("%d/%m/%y %H:%M:%S") %></td>
+
+                  <% count = SaleProduct.find_by_sql("select count(id) as count from sale_products where sale_id = #{sale.id}").first%>
+                  <td><%= count.count %></td>
+                  <td><%= link_to sale do %>
+                    <i class="fa fa-search-plus"></i>
+                    <% end %>
+                  </td>
+                  <td><%= link_to edit_sale_path(sale) do %>
+                    <i class="fa fa-pencil"></i>
+                    <% end %>
+                  </td>
+                  <!--  -->
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 

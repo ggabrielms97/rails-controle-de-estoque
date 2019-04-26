@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stocking Products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stocking</th>
+      <th>Product</th>
+      <th>Numbering</th>
+      <th>Entry</th>
+      <th>Out</th>
+      <th>Balance</th>
+      <th>Sale product</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stocking_products.each do |stocking_product| %>
+      <tr>
+        <td><%= stocking_product.stocking %></td>
+        <td><%= stocking_product.product %></td>
+        <td><%= stocking_product.numbering %></td>
+        <td><%= stocking_product.entry %></td>
+        <td><%= stocking_product.out %></td>
+        <td><%= stocking_product.balance %></td>
+        <td><%= stocking_product.sale_product %></td>
+        <td><%= link_to 'Show', stocking_product %></td>
+        <td><%= link_to 'Edit', edit_stocking_product_path(stocking_product) %></td>
+        <td><%= link_to 'Destroy', stocking_product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stocking Product', new_stocking_product_path %>

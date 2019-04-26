@@ -1,0 +1,62 @@
+ <style type="text/css">
+    .rolagem {
+    height: 180px;
+    overflow: auto;
+    padding: 1px 1px 1px 1px;
+  }
+ </style>
+ 
+<br>
+<% f = Person.find_by_id(@stocking.provider_id) %>
+<div style="margin-left: 50px"><h5>Fornecedor: <%= f.name %></h5></div>
+<br>
+<div class="m-portlet m-portlet--mobile">
+  <div class="m-portlet__body">
+    
+      <table class="table m-table m-table--head-bg-success">
+          <thead>
+            <tr>
+              <th width="50">
+                #
+              </th>
+              <th width="50">
+                Cod.
+              </th>
+              <th width="300">
+                Nome
+              </th>
+              <th width="100" align="center">
+                Tamanho / Numeração
+              </th>
+              <th width="100" align="center">
+                Quantidade
+              </th> 
+              <th width="10">
+                
+              </th>
+            </tr>
+          </thead>
+        </table>
+      <div class="m-section__content rolagem">
+        <table class="table m-table m-table--head-bg-success">
+          <tbody> 
+            <% stocking_products.each do |sp| %>
+              <tr>
+                <td width="50"><%= sp.id %></td>
+                <td width="50"><%= sp.product_id %></td>
+                <td width="300"><%= sp.product.name %></td>
+                <td width="100" align="center"><%= sp.numbering.number %></td>
+                <td width="100" align="center"><%= sp.entry %></td>
+                <td width="10"><%= link_to sp, method: :delete, data: { confirm: 'Confirmar exclusão?',placement:"top", toggle: "tooltip", :"original-title" => "Remover" }, class: "btn btn-danger btn-sm" do %>
+                        x
+                <% end %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      
+      
+  </div>
+</div> 
+ 

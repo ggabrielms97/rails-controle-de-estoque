@@ -1,0 +1,61 @@
+<div class="m-content">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <span class="m-portlet__head-icon m--hide">
+                <i class="la la-gear"></i>
+              </span>
+              <h3 class="m-portlet__head-text">
+                Nova categoria
+              </h3>
+            </div>
+          </div>
+        </div>
+        
+        <%= form_with(model: category, local: true, html: {class: "m-form"}) do |form| %> 
+          <% if category.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(category.errors.count, "error") %> prohibited this product from being saved:</h2>
+              
+              <ul>
+              <% category.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>       
+          <div class="m-portlet__body">
+            <div class="m-form__section m-form__section--first">
+              <div class="form-group m-form__group">
+                <label for="example_input_full_name">
+                  Nome:
+                </label>
+                <%= form.text_field :name, id: :product_name, class: "form-control m-input", placeholder: "Nome" %>
+              </div>
+              <div class="form-group m-form__group">
+                <label>
+                  Status:
+                </label>
+                <%= form.check_box :status, id: :brand_status, class: "form-control m-input" %>
+              </div>
+            </div>
+          </div>
+          <div class="m-portlet__foot m-portlet__foot--fit">
+            <div class="m-form__actions m-form__actions">
+              <button type="submit" class="btn btn-primary">
+                Salvar
+              </button>
+              <%= link_to categories_path, class: "btn btn-secondary" do %>
+                Cancelar
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

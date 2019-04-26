@@ -1,0 +1,50 @@
+<div class="m-section">
+  <div class="m-section__content">
+    <table class="table m-table m-table--head-bg-success">
+      <thead>
+        <tr>
+          <th width="30">
+            #
+          </th>
+          <th width="200">
+            Produto
+          </th>
+          <th width="50">
+            Preco
+          </th>
+          <% numbs = Numbering.all %>
+          <% numbs.each do |n|%>
+            <th width="50">
+              <%= n.number %>
+            </th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody> 
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= product.id %></td>
+            <td><%= product.name %></td>
+            <td><%= number_to_currency(product.price.to_f, unit: "R$ ", separator: ",", delimiter: ".") %></td>
+            
+            <% numbs.each do |n|%>
+              <% stock = Stocking.find_by_sql("select COALESCE(sum(entry - out), 0) as value, numbering_id from stocking_products where product_id = #{product.id} and numbering_id = #{n.id} group by numbering_id").first %>
+              
+              <% if stock.present? %>
+                <th width="50" align="center" onMouseOver="javascript:this.style.backgroundColor='#949494'"
+              onMouseOut="javascript:this.style.backgroundColor=''"
+              onClick="teste(<%=product.id%>, '<%=product.name%>', <%=product.price%>, <%=stock.numbering_id%>, <%= stock.value %>)">
+                  <%= stock.value %>
+                </th>
+              <% else %>              
+                <th width="50" align="center">
+                  0
+                </th>
+              <% end %>
+          <% end %>
+          </tr>
+        <% end %>
+      </tbody> 
+    </table>
+  </div>
+</div>

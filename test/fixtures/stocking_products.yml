@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stocking: one
+  product: one
+  numbering: one
+  entry: 1
+  out: 1
+  balance: 1
+  sale_product: one
+
+two:
+  stocking: two
+  product: two
+  numbering: two
+  entry: 1
+  out: 1
+  balance: 1
+  sale_product: two

@@ -1,0 +1,33 @@
+<div class="group">
+  <table>
+    <thead style="font-size: 18px">
+      <tr>
+      <th width="100">
+          # Cod.  
+        </th>
+        <th width="300">
+          Produto
+        </th>
+        <th width="150">
+          Numeração
+        </th>
+        <th width="150">Min. estoque</th>
+        <th width="150">Entrada</th>
+        <th width="150">Saida</th>
+      </tr>
+    </thead>
+    <tbody style="font-size: 16px"> 
+      <% @res.each do |p| %>
+        <tr class="<%= cycle("cor1", "cor2") %>">
+          <td width="100">  <%= p.id.to_s.rjust(4,'0') %></td>
+          <td width="300" align="left"><%= p.name %></td>
+          <td width="100" align="center"><%= p.min_stock %></td>
+          <td width="100" align="center"><%= p.numbering_id %></td>
+          <td width="100" align="center"><%= p.entrada %></td>
+          <td width="100" align="center"><%= p.vendas %></td>
+        </tr>
+      <% end %>
+    </tbody>
+ </table>
+</div>
+

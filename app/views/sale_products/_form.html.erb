@@ -1,0 +1,71 @@
+<div class="m-portlet__body">
+
+    <%= form_with(model: sale_product, local: true, :html => {class: "m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed"}) do |form| %>
+    <div class="form-group m-form__group row">
+      <div class="col-lg-2">
+        <label>
+          Cod:
+        </label>
+        <%= form.hidden_field :sale_id, id: :sale_id, value: params[:id] %>
+        <%= form.number_field :product_id, id: :product_id, class: "form-control", readonly: true %>
+      </div>
+      <div class="col-lg-5">
+        <label>
+          Produto:
+        </label>
+        <input type="text" id="prod_name" name="" class="form-control">
+      </div>
+      <div class="col-lg-2">
+        <label class="">
+          Qtd:
+        </label>
+        <%= hidden_field_tag :minimun, 0, id: :minimum %>
+        <%= form.number_field :quantity, id: :quantity, class: "form-control", placeholder: "Qtd" %>
+      </div>
+      <div class="col-lg-2">
+        <label class="">
+          Total:
+        </label>
+        <%= form.hidden_field :number, id: :number, class: "form-control", placeholder: "R$" %>
+        <%= form.text_field :total, id: :total, class: "form-control", placeholder: "R$" %>
+      </div>      
+      <div class="col-lg-1">
+        <button type="submit" class="btn btn-primary" style="margin-top: 26px">
+          +
+        </button>
+      </div>
+    </div>
+    <% end %>
+        <div style="text-align: right">
+    <%= link_to sales_path do %> 
+      <button class="btn btn-default">Voltar</button>
+    <% end %>
+    <button class="btn btn-primary" id="search">Busca [F2]</button>
+    <%= link_to sales_path do %> 
+      <button class="btn btn-success">Finalizar</button>
+    <% end %>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+  $("#search").click(function(){
+    window.open('/sales/search_products', 'Pagina', ' SCROLLBARS=YES, TOP=50, LEFT=50, WIDTH=1150, HEIGHT=650');
+  })
+
+  $(document).keydown(function(event) {
+    if(event.which == 113) { //F2
+      window.open('/sales/search_products', 'Pagina', ' SCROLLBARS=YES, TOP=50, LEFT=50, WIDTH=1150, HEIGHT=650');
+    }
+  });
+
+  $("#quantity").change(function(){
+    if ($(this).val() > $("#minimum").val()) {
+      $(this).val('');
+      $(this).val(0);
+      $(this).focus();
+    } else {
+      $("#total").val(parseFloat($("#total").val()) * $(this).val());
+    }
+  })  
+</script>

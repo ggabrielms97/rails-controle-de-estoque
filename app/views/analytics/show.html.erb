@@ -1,0 +1,68 @@
+
+<div class="m-content">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="m-portlet m-portlet--tab">
+				<div class="m-portlet__head">
+					<div class="m-portlet__head-caption">
+						<div class="m-portlet__head-title">
+							<span class="m-portlet__head-icon m--hide">
+								<i class="la la-gear"></i>
+							</span>
+							<h3 class="m-portlet__head-text">
+								Relatório de estoque
+							</h3>
+						</div>
+					</div>
+				</div>
+				<!--begin::Form-->
+				<%= form_tag result_stocking_analytics_path, class: "m-form m-form--fit m-form--label-align-right", :method => "post" do%>
+					<div class="m-portlet__body">
+						<div class="form-group m-form__group">
+							<label for="exampleInputEmail1">
+								Data Inicial
+							</label>
+							<%= text_field_tag :initial, '', id: :initial, class: "form-control m-input" %>
+						</div>
+
+						<div class="form-group m-form__group">
+							<label for="exampleInputPassword1">
+								Data Final
+							</label>
+							<%= text_field_tag :final, '', id: :final, class: "form-control m-input" %>
+						</div>
+						<div class="col-md-6">
+
+						</div>
+
+						<div class="col-md-6">
+							
+						</div>
+					</div>
+
+					<div class="m-portlet__foot m-portlet__foot--fit">
+						<div class="m-form__actions">
+							<button type="submit" class="btn btn-primary">
+								Gerar
+							</button>
+							<button type="reset" class="btn btn-secondary">
+								Cancelar
+							</button>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+  $('#initial').datepicker({
+    format: "yyyy-mm-dd"
+  }); 
+
+  $('#final').datepicker({
+    format: "yyyy-mm-dd"
+  }); 
+</script>

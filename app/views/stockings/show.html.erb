@@ -1,0 +1,10 @@
+<div class="m-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="m-portlet">
+        <%= render partial: "/stocking_products/index", locals: { stocking_products: @stocking.stocking_products } %>
+        <%= render partial: "/stocking_products/form", locals: { stocking_product: StockingProduct.new(stocking_id: @stocking.id) } %>
+      </div>
+    </div>
+  </div>
+</div>

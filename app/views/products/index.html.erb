@@ -1,0 +1,106 @@
+ 
+
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title m-subheader__title--separator">
+        Produtos
+      </h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a href="#" class="m-nav__link m-nav__link--icon">
+            <i class="m-nav__link-icon la la-home"></i>
+          </a>
+        </li>
+        <li class="m-nav__separator">
+          -
+        </li>
+        <li class="m-nav__item">
+          <a href="" class="m-nav__link">
+            <span class="m-nav__link-text">
+              Produtos
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>    
+  </div>
+</div>
+<div class="m-content">
+  <div class="m-portlet m-portlet--mobile">
+    <div class="m-portlet__body">
+      <div class="m-form m-form--label-align-left m--margin-top-20 m--margin-bottom-30">
+        <div class="row align-items-center">                    
+          <div class="col-xl-4 order-1 order-xl-2 m--align-left">
+            <%= link_to new_product_path, class: "btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill" do %>                 
+              <span>
+                <i class="la la-barcode"></i>
+                <span>
+                  Novo produto
+                </span>
+              </span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+ 
+        <div class="m-section">
+          <div class="m-section__content">
+            <table class="table m-table m-table--head-bg-success">
+              <thead>
+                <tr>
+                  <th width="50">
+                    #
+                  </th>
+                  <th width="100">
+                    Cod.
+                  </th>
+                  <th width="300">
+                    Nome
+                  </th>
+                  <th width="100">
+                    Preco
+                  </th>
+                  <th width="50">
+                    Min.
+                  </th>
+                  <th width="50">
+                    Atual
+                  </th>
+                  <th width="5"></th>
+                  <th width="5"></th>
+                  <th width="5"></th>
+                </tr>
+              </thead>
+              <tbody> 
+                <% @products.each do |product| %>
+                  <tr>
+                    <td><%= product.id %></td>
+                    <th><%= product.code %></th>
+                    <td><%= product.name %></td>
+                    <td><%= number_to_currency(product.price.to_f, unit: "R$ ", separator: ",", delimiter: ".") %></td>
+                    <td align="center"><%= product.min_stock %></td>
+                    <td align="center"><%= product.stock %></td>
+                    <td><%= link_to product do %>
+                      <i class="fa fa-search-plus"></i>
+                      <% end %>
+                    </td>
+                    <td><%= link_to edit_product_path(product) do %>
+                      <i class="fa fa-pencil"></i>
+                      <% end %>
+                    </td>
+                    <td><%= link_to product, method: :delete, data: { confirm: 'confirmar a exclusão?' } do %>
+                      <i class="fa fa-remove"></i>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 

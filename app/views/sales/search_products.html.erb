@@ -1,0 +1,82 @@
+ 
+<div class="row" style="padding: 1%;">
+	<div class="col-xl-12">
+
+      <h3 class="m-subheader__title m-subheader__title--separator" style=" text-align: center">
+        BUSCA DE PRODUTOS
+      </h3> 
+     </div>
+</div>
+<div class="m-content">
+  	<div class="m-portlet m-portlet--mobile">
+    	<div class="m-portlet__body">
+      		<div class="m-form m-form--label-align-left m--margin-top-20 m--margin-bottom-30">
+        		<%= form_tag dinamic_search_products_sales_path, :method => "get" do %>
+	        		<div class="row align-items-center">
+	      				<div class="col-xl-2 order-1 order-xl-2 m--align-left">
+	      				</div>
+	      				<div class="col-xl-8 order-1 order-xl-2 m--align-left">
+		            		<input type="text" class="form-control" id="search_label" onKeyUp="pesquisa(this.value)" placeholder="Digite o nome/marca do produto" name="" autofocus="">
+		        		</div>
+		        		<div class="col-xl-2 order-1 order-xl-2 m--align-left">
+		        			<img src="load.gif" id="spinner" style="display: none">
+						</div>
+        			</div>
+        		<% end %>
+      		</div>
+
+  			<div id="pagina"></div>
+    	</div>
+  	</div>
+</div>
+ 
+<script type="text/javascript">
+	function pesquisa(value){
+
+    url="/sales/dinamic_search_products?search_label=" + value;
+
+    ajax(url);
+  }
+
+  function ajax(url){
+    $('#spinner').show();
+    req = null;
+
+    if (window.XMLHttpRequest) {
+      req = new XMLHttpRequest();
+      req.onreadystatechange = processReqChange;
+      req.open("GET",url,true);
+      req.send(null);
+    } else if (window.ActiveXObject) {
+      req = new ActiveXObject("Microsoft.XMLHTTP");
+
+      if (req) {
+        req.onreadystatechange = processReqChange;
+        req.open("GET",url,true);
+        req.send();
+      }
+    }
+  }
+
+
+  function processReqChange(){
+    if (req.readyState == 4) {
+      if (req.status == 200) {
+        onSuccess:$('#spinner').hide();
+        document.getElementById('pagina').innerHTML = req.responseText;
+      } else {
+        alert("Houve um problema ao obter os dados:n" + req.statusText);
+      }
+    }
+  }
+
+function teste(id, name, total, number, stock){
+      window.opener.document.getElementById('product_id').value = id;
+      window.opener.document.getElementById('prod_name').value = name;
+      window.opener.document.getElementById('total').value = total;
+      window.opener.document.getElementById('number').value = number;
+      window.opener.document.getElementById('minimum').value = stock;
+      window.opener.document.getElementById("quantity").focus();
+      self.close();
+  }
+</script>
